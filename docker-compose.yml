@@ -7,6 +7,11 @@ services:
     restart: unless-stopped
     ports:
       - "8000:8000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     volumes:
       # Persist database separately
       - ./data/database:/app/data
