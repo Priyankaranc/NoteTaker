@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate PWA Icons</title>
+</head>
+<body>
+    <h2>PWA Icon Generator</h2>
+    <p>Right-click each canvas and "Save Image As..." to save the icons to the static folder.</p>
+    
+    <h3>icon-192.png</h3>
+    <canvas id="icon192" width="192" height="192"></canvas>
+    
+    <h3>icon-512.png</h3>
+    <canvas id="icon512" width="512" height="512"></canvas>
+
+    <script>
+        function drawIcon(canvas) {
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#6366f1');
+            gradient.addColorStop(1, '#4f46e5');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // White note paper
+            const margin = size * 0.15;
+            const noteWidth = size - (margin * 2);
+            const noteHeight = size - (margin * 2);
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(margin, margin, noteWidth, noteHeight);
+            
+            // Border
+            ctx.strokeStyle = '#4f46e5';
+            ctx.lineWidth = size * 0.02;
+            ctx.strokeRect(margin, margin, noteWidth, noteHeight);
+            
+            // Lines to simulate text
+            ctx.fillStyle = '#6366f1';
+            const lineMargin = margin * 1.8;
+            const lineSpacing = size * 0.12;
+            const lineHeight = size * 0.025;
+            
+            for (let i = 0; i < 3; i++) {
+                const y = lineMargin + margin + (i * lineSpacing);
+                ctx.fillRect(lineMargin, y, noteWidth - lineMargin + margin, lineHeight);
+            }
+        }
+
+        // Draw both icons
+        drawIcon(document.getElementById('icon192'));
+        drawIcon(document.getElementById('icon512'));
+        
+        // Auto-download function
+        function downloadCanvas(canvas, filename) {
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+        
+        // Auto-download on page load
+        setTimeout(() => {
+            downloadCanvas(document.getElementById('icon192'), 'icon-192.png');
+            setTimeout(() => {
+                downloadCanvas(document.getElementById('icon512'), 'icon-512.png');
+            }, 500);
+        }, 1000);
+    </script>
+</body>
+</html>
+
