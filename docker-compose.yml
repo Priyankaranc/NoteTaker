@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   notetaker:
     build:
@@ -10,10 +8,11 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      # Persist database
-      - ./data/notes.db:/app/notes.db
-      # Persist uploaded files
+      # Persist database separately
+      - ./data/database:/app/data
+      # Persist uploads in a different location
       - ./data/uploads:/app/uploads
+    working_dir: /app
     environment:
       - TZ=UTC
       # Optional: Override config if needed

@@ -19,6 +19,7 @@ import database
 # Create necessary directories
 UPLOAD_DIR = Path("uploads")
 STATIC_DIR = Path("static")
+Path("data").mkdir(exist_ok=True)
 UPLOAD_DIR.mkdir(exist_ok=True)
 STATIC_DIR.mkdir(exist_ok=True)
 

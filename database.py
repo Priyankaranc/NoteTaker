@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import List, Optional, Dict, Any
 from pathlib import Path
 
-DATABASE_PATH = "notes.db"
+DATABASE_PATH = "data/notes.db"
 
 
 async def init_db():
