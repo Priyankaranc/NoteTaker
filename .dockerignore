@@ -1,16 +1,48 @@
-.venv
-__pycache__
-.pytest_cache
-.mypy_cache
-*.pyc
-*.pyo
-*.pyd
-.git
-.gitignore
-*.log
-*.env
-env/
-build/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
 dist/
+build/
 
+# Virtual environments
+venv/
+env/
+ENV/
 
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Database (will be mounted as volume)
+notes.db
+notes.db-journal
+
+# Uploads (will be mounted as volume)
+uploads/*
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+*.md
+PWA_SETUP.md
+
+# Generated files
+create_icons.html
+generate_icons.py
+
+# OS
+.DS_Store
+Thumbs.db

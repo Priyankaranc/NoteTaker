@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  notetaker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: notetaker-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist database
+      - ./data/notes.db:/app/notes.db
+      # Persist uploaded files
+      - ./data/uploads:/app/uploads
+    environment:
+      - TZ=UTC
+      # Optional: Override config if needed
+      # - HOST=0.0.0.0
+      # - PORT=8000
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - notetaker-network
+    labels:
+      - "com.notetaker.description=NoteTaker FastAPI application"
+
+networks:
+  notetaker-network:
+    driver: bridge
+
