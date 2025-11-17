@@ -14,7 +14,7 @@ FROM python:3.11-slim
 
 # Create non-root user for security
 RUN useradd -m -u 1000 appuser && \
-    mkdir -p /app/uploads /app/static && \
+    mkdir -p /app/data /app/uploads /app/static && \
     chown -R appuser:appuser /app
 
 WORKDIR /app
